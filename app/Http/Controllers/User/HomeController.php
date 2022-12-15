@@ -5,11 +5,11 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Section;
-use App\Photo;
+use App\Models\Photo;
 use App\User;
 use App\Menu;
 use App\Certificate;
-use App\Slider;
+use App\Models\Farzan\Slider;
 use App\ProductCategory;
 use App\Models\ProductCat;
 use App\About;
@@ -44,10 +44,28 @@ class HomeController extends Controller
             }
             $error = "رمز عبور اشتباه است";
         }
-        return redirect()->back()->with(['status' => 'danger-600', "message" => $error]);
+        return redirect()->back()->with(['status' => 'danger-600', "message" => $error]);        
     }
 
     public function index()
+    {
+        // dd(password_verify('passwor',User::first()->password));
+
+        $sliders=Slider::with('photo')->orderBy('id','desc')->get();
+//        $product_cat_homes=ProductCategory::where('status_home','active')->orderBy('id','desc')->take(4)->get();
+        $menu_slider_downs=Menu::where('slider_down','active')->orderBy('sort_id','ASC')->take(4)->get();
+        $about=About::find(1);
+        $products=Product::where('site','active')->where('status_home','active')->orderBy('id','desc')->take(6)->get();
+        $setting=Setting::find(1);
+        $abouts_f=AboutFeature::where('status','active')->where('status_home','active')->orderBy('id','ASC')->take(3)->get();
+        $certs=Certificate::where('status_home','active')->orderBy('id','DESC')->get();
+        $partners=Partner::orderBy('id','DESC')->get();
+        $blogs=Blog::where('status','active')->where('status_home','active')->orderBy('id','desc')->take(4)->get();
+
+        $sections = Section::where('status', 'active')->get();
+        return view('user.index', compact('sections','sliders','menu_slider_downs','about','products','setting','abouts_f','certs','partners','blogs') );
+    }
+    public function index1()
     {
         // dd(password_verify('passwor',User::first()->password));
 
@@ -63,7 +81,7 @@ class HomeController extends Controller
         $blogs=Blog::where('status','active')->where('status_home','active')->orderBy('id','desc')->take(4)->get();
 
         $sections = Section::where('status', 'active')->get();
-        return view('user.index', compact('sections','sliders','menu_slider_downs','about','products','setting','abouts_f','certs','partners','blogs') );
+        return view('user.index1', compact('sections','sliders','menu_slider_downs','about','products','setting','abouts_f','certs','partners','blogs') );
     }
 
 
@@ -135,4 +153,45 @@ class HomeController extends Controller
 //        }
 
     }
+
+    public function projects(){
+        $setting=Setting::find(1);
+
+        $sliders=Slider::with('photo')->orderBy('created_at','asc')->get();
+        $titleSeo = "شرکت فرزان";
+        return view('user.projects.index-old',compact('sliders','titleSeo','setting'));
+    }
+
+    public function service()
+    {
+        $setting=Setting::find(1);
+        $titleSeo = "شرکت فرزان";
+        $sliders=Slider::with('photo')->orderBy('created_at','asc')->get();
+
+        return view('user.service.index',compact('titleSeo','setting','sliders'));
+
+    }
+
+    public function product()
+    {
+        $setting=Setting::find(1);
+        $titleSeo = "شرکت فرزان";
+//        $sliders=Slider::with('photo')->orderBy('created_at','asc')->get();
+        return view('user.product.index',compact('titleSeo','setting'));
+
+    }
+
+    public function partner(){
+        $setting=Setting::find(1);
+        $titleSeo = "همکاران فرزان";
+        $items = Partner::where('is_title', 'deactive')->orderBy('sort_id')->get();
+        $item = Partner::where('is_title', 'active')->first();
+        return view('user.partner.index',compact('titleSeo','setting','item','items'));
+    }
+    public function certificate(){
+        $setting=Setting::find(1);
+        $titleSeo = "گواهینامه ها";
+        return view('user.certificate.show',compact('titleSeo','setting'));
+    }
+
 }

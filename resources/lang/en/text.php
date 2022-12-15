@@ -10,6 +10,12 @@ return [
     'flash_msg'=>'Successfully registered.',
     'err_msg'=>'An error has occurred, please check.',
     'not_found_msg'=>'There Are No Results.',
+    'sidebar'=>[
+        'Advantage'=>'Advantage',
+        'Top Projects'=>'Top Projects',
+        'Farzan News'=>'Farzan News',
+        'World of Electricity Industry'=>'World of Electricity Industry',
+    ],
     'page_name' => [
         'home'=>'Home',
         'contact'=>'Contact Us',
@@ -24,6 +30,8 @@ return [
         'search'=>'Search',
         'employment'=>'Recruitment',
         'medical'=>'Medical Advice',
+        'research_development'=>'Research And Development',
+        
     ],
     'header_up'=>[
         'call_us'=>'Call Us : ',
@@ -66,7 +74,7 @@ return [
         'partners_title'=>'Partners We',
         'blog_title'=>'Blog',
         'cert_title'=>'Certificates',
-        'access_staff_panel'=>'access the staff panel',
+        'access_staff_panel'=>'Staff Panel',
     ],
     'home_slider_typo' => [
         '1'=>'we',
@@ -153,4 +161,6 @@ return [
         'tab2'=>'Help Sheet',
         'tab3'=>'Medical Recommendations',
     ],
+    'header_title' => 'Provider of electrical services for industrial projects in fields of Power, Electronics, Control and instruments.',
+    'farzan' => 'Farzan Company',
 ];

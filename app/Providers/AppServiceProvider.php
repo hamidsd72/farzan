@@ -86,7 +86,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
 
-        view()->composer('user.index', function ($view) {
+        view()->composer('layouts.user', function ($view) {
             $sett=Setting::find(1);
             $links=Link::where('status','!=','hide')->where('position','!=','footer')->orderBy('sort')->get(['title','en_title','url','position']);
             $titleSeo = set_lang($sett,'title',app()->getLocale());
@@ -171,6 +171,111 @@ class AppServiceProvider extends ServiceProvider
                     'titleSeo' => $titleSeo,
                     'keywordsSeo' => $keywordsSeo,
                     'descriptionSeo' => $descriptionSeo,
+                    'urlPage' => $this->url,
+                    'setting'=>$sett,
+                    'links'=>$links,
+                    'last_product'=>Product::where('site','active')->orderBy('id','desc')->take(5)->get(),
+                    'last_blog'=>Blog::where('status','active')->orderBy('id','desc')->take(5)->get(),
+                'product_cat'=>ProductCat::orderBy('id','DESC')->get(),
+                'product_category'=>ProductCategory::where('parent_id',0)->get(),
+                'product_type'=>ProductType::where('parent_id',0)->get(),
+                'contact_info'=>ContactInfo::find(1),
+                'type_g'=>$type_g1,
+                'type_s'=>$type_s1,
+                'category_g'=>$category_g1,
+                'category_s'=>$category_s1,
+                'about_menu'=>Menu::where('status','active')->where('status_menu','active')->orderBy('id','desc')->get(),
+                'menu_r'=>Menu::where('status','active')->where('status_footer','active')->where('place','right')->orderBy('sort_id','ASC')->get(),
+                    'menu_l'=>Menu::where('status','active')->where('status_footer','active')->where('place','left')->orderBy('sort_id','ASC')->get(),
+                'menu_1'=>Menu::where('status','active')->where('menu_type','menu_1')->orderBy('sort_id','ASC')->get(),
+                'menu_2'=>Menu::where('status','active')->where('menu_type','menu_2')->orderBy('sort_id','ASC')->get(),
+                ]);
+        });
+        view()->composer('user.projects', function ($view) {
+            $sett=Setting::find(1);
+            $links=Link::where('status','!=','hide')->where('position','!=','footer')->orderBy('sort')->get(['title','en_title','url','position']);
+            $titleSeo = set_lang($sett,'title',app()->getLocale());
+            $keywordsSeo =set_lang($sett,'keywords',app()->getLocale());
+            $descriptionSeo =set_lang($sett,'description',app()->getLocale());
+
+            $seo = Meta::where('name_page', $this->url)->first();
+            if (is_null($seo)) {
+                $seo = Meta::where('name_page', $this->url . '/')->first();
+
+                if (is_null($seo)) {
+                    $seo = Meta::where('name_page', explode('?', $this->url)[0])->first();
+
+
+                    if (is_null($seo)) {
+                        $seo = Meta::where('name_page', explode('?', $this->url)[0] . '/')->first();
+
+                    }
+
+                }
+            }
+
+
+            if (!is_null($seo)) {
+                $titleSeo = $seo->title_page;
+                $keywordsSeo = $seo->keyword;
+                $descriptionSeo = $seo->description;
+            }
+            $giahi=Product::where('cat_id',1)->get();
+            $type_g=[];
+            $category_g=[];
+            foreach ($giahi as $p_g)
+            {
+                $p_type=ProductType::find($p_g->type_id);
+                if($p_type->parent)
+                {
+                    array_push($type_g,$p_type->parent->id);
+                }
+                else
+                {
+                    array_push($type_g,$p_type->id);
+                }
+                $p_cat=ProductCategory::find($p_g->category_id);
+                if($p_cat->parent)
+                {
+                    array_push($category_g,$p_cat->parent->id);
+                }
+                else
+                {
+                    array_push($category_g,$p_cat->id);
+                }
+            }
+            $shimiaei=Product::where('cat_id',2)->get();
+            $type_s=[];
+            $category_s=[];
+            foreach ($shimiaei as $p_s)
+            {
+                $p_type=ProductType::find($p_s->type_id);
+                if($p_type->parent)
+                {
+                    array_push($type_s,$p_type->parent->id);
+                }
+                else
+                {
+                    array_push($type_s,$p_type->id);
+                }
+                $p_cat=ProductCategory::find($p_s->category_id);
+                if($p_cat->parent)
+                {
+                    array_push($category_s,$p_cat->parent->id);
+                }
+                else
+                {
+                    array_push($category_s,$p_cat->id);
+                }
+            }
+            $category_g1=ProductCategory::wherein('id',$category_g)->get();
+            $category_s1=ProductCategory::wherein('id',$category_s)->get();
+            $type_g1=ProductType::wherein('id',$type_g)->get();
+            $type_s1=ProductType::wherein('id',$type_s)->get();
+            $view->with([
+                    'titleSeo' => $titleSeo,
+                    'keywordsSeo' => $keywordsSeo,
+                    'descriptionSeo' => $descriptionSeo ?: 'تست',
                     'urlPage' => $this->url,
                     'setting'=>$sett,
                     'links'=>$links,

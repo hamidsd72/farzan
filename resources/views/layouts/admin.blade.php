@@ -18,8 +18,8 @@
     <link rel="stylesheet" href="{{ asset('css/some-font.css') }}">
 
     <style>
-         nav[aria-label="Pagination Navigation"]>div:first-child,
-         nav[aria-label="Pagination Navigation"]>div>div:first-child
+        nav[aria-label="Pagination Navigation"]>div:first-child,
+        nav[aria-label="Pagination Navigation"]>div>div:first-child
         {
             display: none!important;
         }
@@ -85,8 +85,7 @@
         <div class="navbar-left">
 
             <div class="notify pull-left">
-                <li class="dropdown-toggle" id="notify" data-toggle="dropdown"><i class="icon-brain text-grey-400"></i>
-                </li>
+                <li class="dropdown-toggle" id="notify" data-toggle="dropdown"><i class="icon-brain text-grey-400"></i></li>
                 <ul class="notify-menu dropdown-menu" role="notify" aria-labelledby="notify">
                     <div class="notify-content-heading pull-right w-100">آخرین فعالیت ها
                         <i class="icon-stats-bars2 pull-left text-grey-300"></i>
@@ -103,15 +102,13 @@
                                 </div>
                             @elseif($item->type == 'delete')
                                 <div class="notify-media-right">
-                                    <span class="notify-icon-remove pull-right w-100"><i
-                                            class="fa fa-remove"></i></span>
+                                    <span class="notify-icon-remove pull-right w-100"><i class="fa fa-remove"></i></span>
                                 </div>
                             @endif
                             <div class="notify-media-body">
                                 <a href="javascript:void(0)" class="media-heading">
                                     <span class="text-semibold text-grey-600">{{ $item->user->name }}</span>
-                                    <span
-                                        class="media-annotation pull-left">{{ my_jdate($item->created_at, 'Y/m/d H:i') }}</span>
+                                    <span class="media-annotation pull-left">{{ my_jdate($item->created_at, 'Y/m/d H:i') }}</span>
                                 </a>
                                 <span class="text-muted">{{ $item->text }}...</span>
                             </div>
@@ -120,8 +117,7 @@
                     @if(count($activities)<=0)
                         <li class="notify-media">
                             <div class="notify-media-right">
-                                <span class="notify-icon-none pull-right w-100"><i
-                                        class="fa fa-remove text-grey-300"></i></span>
+                                <span class="notify-icon-none pull-right w-100"><i class="fa fa-remove text-grey-300"></i></span>
                             </div>
                             <div class="notify-media-body">
                                 <a href="javascript:void(0)" class="media-heading">
@@ -133,18 +129,15 @@
                         </li>
                     @endif
                     <div class="notify-content-footer pull-right w-100">
-                        <a href="{{ route('admin-activities') }}" data-popup="tooltip"
-                           title="تمام پیام ها"><i
-                                class="icon-menu display-block"></i></a>
+                        <a href="{{ route('admin-activities') }}" data-popup="tooltip" title="تمام پیام ها"><i class="icon-menu display-block"></i></a>
                     </div>
                 </ul>
             </div>
         </div>
         <div class="navbar-right" data-direction="rtl">
             <div class="dropdown">
-                <a href="javascript:void(0)" class="dropdown-toggle" id="user" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false"><i
-                        class="now-ui-icons users_circle-08 ml-2"></i>{{ \Illuminate\Support\Facades\Auth::user()->name }}
+                <a href="javascript:void(0)" class="dropdown-toggle" id="user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="now-ui-icons users_circle-08 ml-2"></i>{{ \Illuminate\Support\Facades\Auth::user()->name }}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="user">
                     <a href="{{route('user.index')}}" class="dropdown-item">
@@ -152,7 +145,7 @@
                     </a>
                     <a href="javascript:void(0)" class="dropdown-item" onclick="$('.logout').submit()">
                         <form action="{{ url('logout') }}" method="POST" class="logout hidden">{{ csrf_field() }}</form>
-                       خروج</a>
+                        خروج</a>
                 </div>
             </div>
         </div>
@@ -170,17 +163,17 @@
                 <div class="row">
                     <div class="col-12 ">
                         <div class="sidebar list-group mb-2">
-                            <a href="{{route('admin-home')}}" class="sidebar-title list-group-item active"><i
-                                    class="fa fa-bars text-size-large ml-2"></i>فرزان</a>
+                            <a href="{{route('admin-home')}}" class="sidebar-title list-group-item active">
+                                    <i class="fa fa-bars text-size-large ml-2"></i>فرزان</a>
 
-{{--                            <a href="{{ route('admin-user-list') }}" class="list-group-item list-group-item-action"><i--}}
-{{--                                    class="fas fa-circle-notch text-size-small ml-2"></i>لیست کاربران</a>--}}
+                            {{--                            <a href="{{ route('admin-user-list') }}" class="list-group-item list-group-item-action"><i--}}
+                            {{--                                    class="fas fa-circle-notch text-size-small ml-2"></i>لیست کاربران</a>--}}
 
-{{--                            <a href="{{ route('email-list') }}" class="list-group-item list-group-item-action"><i--}}
-{{--                                    class="fas fa-circle-notch text-size-small ml-2"></i>لیست خبرنامه</a>--}}
+                            {{--                            <a href="{{ route('email-list') }}" class="list-group-item list-group-item-action"><i--}}
+                            {{--                                    class="fas fa-circle-notch text-size-small ml-2"></i>لیست خبرنامه</a>--}}
 
-{{--                            <a href="{{ route('live-list') }}" class="list-group-item list-group-item-action"><i--}}
-{{--                                    class="fas fa-circle-notch text-size-small ml-2"></i>لیست ویدئو ها</a>--}}
+                            {{--                            <a href="{{ route('live-list') }}" class="list-group-item list-group-item-action"><i--}}
+                            {{--                                    class="fas fa-circle-notch text-size-small ml-2"></i>لیست ویدئو ها</a>--}}
 
                             {{-- <div class="sidebar-a list-group-item list-group-item-action" id="b1">
                                 <i class="fas fa-circle-notch text-size-small ml-2"></i>محصولات
@@ -206,7 +199,7 @@
 
                                 </div>
                             </div> --}}
-                            {{-- <div class="sidebar-a list-group-item list-group-item-action" id="b2">
+                             <div class="sidebar-a list-group-item list-group-item-action" id="b2">
                                 <i class="fas fa-circle-notch text-size-small ml-2"></i>بلاگ
                                 <div class="sidebar-ul" id="s2">
                                     <a href="{{ route('admin-blog-list','news') }}"
@@ -216,22 +209,22 @@
                                        class="list-group-item list-group-item-action"><i
                                                 class="fas fa-circle-notch text-size-small ml-2"></i>مقالات</a>
 
-                                    <a href="{{ route('admin-article-comment-list') }}"
-                                       class="list-group-item list-group-item-action"><i
-                                                class="fas fa-circle-notch text-size-small ml-2"></i>نظرات
-                                        بلاگ ها@if(count($comment_blog))<span
-                                                style="color: red;"> ({{count($comment_blog)}}
-                                             جدید )</span>@endif</a>
+{{--                                    <a href="{{ route('admin-article-comment-list') }}"--}}
+{{--                                       class="list-group-item list-group-item-action"><i--}}
+{{--                                                class="fas fa-circle-notch text-size-small ml-2"></i>نظرات--}}
+{{--                                        بلاگ ها@if(count($comment_blog))<span--}}
+{{--                                                style="color: red;"> ({{count($comment_blog)}}--}}
+{{--                                             جدید )</span>@endif</a>--}}
                                 </div>
-                            </div> --}}
+                            </div>
                             <div class="sidebar-a list-group-item list-group-item-action" id="b3">
                                 <i
-                                    class="fas fa-circle-notch text-size-small ml-2"></i>محتوا
+                                        class="fas fa-circle-notch text-size-small ml-2"></i>محتوا
                                 <div class="sidebar-ul" id="s3">
-                                    {{-- <a href="{{ route('admin-club-slider') }}" class="list-group-item list-group-item-action"><i
-                                        class="fas fa-circle-notch text-size-small ml-2"></i>اسلایدر ها</a> --}}
+                                     <a href="{{ route('admin.sliders.index') }}" class="list-group-item list-group-item-action"><i
+                                        class="fas fa-circle-notch text-size-small ml-2"></i>اسلایدر ها</a>
                                     <a href="{{ route('section.index') }}" class="list-group-item list-group-item-action"><i
-                                        class="fas fa-circle-notch text-size-small ml-2"></i>سکشن های صفحات</a>
+                                                class="fas fa-circle-notch text-size-small ml-2"></i>سکشن های صفحات</a>
                                     <a href="{{ route('admin-about-edit',1) }}" class="list-group-item list-group-item-action"><i
                                                 class="fas fa-circle-notch text-size-small ml-2"></i>درباره ما</a>
                                     {{-- <a href="{{ route('admin-menu-list') }}" class="list-group-item list-group-item-action"><i
@@ -244,36 +237,38 @@
                                                 class="fas fa-circle-notch text-size-small ml-2"></i>توصیه های پزشکی</a> --}}
                                     <a href="{{ route('admin-contact-info-edit',1) }}" class="list-group-item list-group-item-action"><i
                                                 class="fas fa-circle-notch text-size-small ml-2"></i>فوتر (تماس با ما)</a>
-                                    {{-- <a href="{{route('admin-about-feature-list')}}" class="list-group-item list-group-item-action"><i
-                                                class="fas fa-circle-notch text-size-small ml-2"></i>ویژگی های ما</a>
-                                    <a href="{{ route('admin-faq-list') }}"
-                                       class="list-group-item list-group-item-action"><i
-                                                class="fas fa-circle-notch text-size-small ml-2"></i>پرسش و پاسخ</a>
+{{--                                     <a href="{{route('admin-about-feature-list')}}" class="list-group-item list-group-item-action"><i--}}
+{{--                                                class="fas fa-circle-notch text-size-small ml-2"></i>ویژگی های ما</a>--}}
+{{--                                    <a href="{{ route('admin-faq-list') }}"--}}
+{{--                                       class="list-group-item list-group-item-action"><i--}}
+{{--                                                class="fas fa-circle-notch text-size-small ml-2"></i>پرسش و پاسخ</a>--}}
                                     <a href="{{ route('admin-partner-list') }}"
                                        class="list-group-item list-group-item-action"><i
                                                 class="fas fa-circle-notch text-size-small ml-2"></i>همکاران ما</a>
-                                    <a href="{{ route('upload') }}" class="list-group-item list-group-item-action"><i
-                                            class="fas fa-circle-notch text-size-small ml-2"></i>آپلود فایل</a> --}}
+                                    <a href="{{ route('projects-category.index') }}" class="list-group-item list-group-item-action">
+                                        <i class="fas fa-circle-notch text-size-small ml-2"></i>پروژه ها</a>
+{{--                                    <a href="{{ route('upload') }}" class="list-group-item list-group-item-action"><i--}}
+{{--                                                class="fas fa-circle-notch text-size-small ml-2"></i>آپلود فایل</a> --}}
 
                                 </div>
                             </div>
-                            {{-- <div class="sidebar-a list-group-item list-group-item-action" id="b4">
+                             <div class="sidebar-a list-group-item list-group-item-action" id="b4">
                                 <i class="fas fa-circle-notch text-size-small ml-2"></i>استخدام
                                 <div class="sidebar-ul" id="s4">
-                                    <a href="{{ route('admin.employment.page.edit') }}"
-                                       class="list-group-item list-group-item-action"><i
-                                                class="fas fa-circle-notch text-size-small ml-2"></i>ویرایش صفحه فرم</a>
+{{--                                    <a href="{{ route('admin.employment.page.edit') }}"--}}
+{{--                                       class="list-group-item list-group-item-action"><i--}}
+{{--                                                class="fas fa-circle-notch text-size-small ml-2"></i>ویرایش صفحه فرم</a>--}}
                                     <a href="{{ route('admin.employment.page.list') }}"
                                        class="list-group-item list-group-item-action"><i
                                                 class="fas fa-circle-notch text-size-small ml-2"></i>لیست صفحات داخلی</a>
-                                    <a href="{{ route('admin.employment.list') }}"
-                                       class="list-group-item list-group-item-action"><i
-                                                class="fas fa-circle-notch text-size-small ml-2"></i>لیست فرم @if(count($employment))<span
-                                                style="color: red;"> ({{count($employment)}}
-                                              جدید )</span>@endif</a></a>
+{{--                                    <a href="{{ route('admin.employment.list') }}"--}}
+{{--                                       class="list-group-item list-group-item-action"><i--}}
+{{--                                                class="fas fa-circle-notch text-size-small ml-2"></i>لیست فرم @if(count($employment))<span--}}
+{{--                                                style="color: red;"> ({{count($employment)}}--}}
+{{--                                              جدید )</span>@endif</a></a>--}}
 
                                 </div>
-                            </div> --}}
+                            </div>
                             {{-- <div class="sidebar-a list-group-item list-group-item-action" id="b5">
                                 <i
                                     class="fas fa-circle-notch text-size-small ml-2"></i>فرم ها
@@ -287,20 +282,20 @@
                             </div> --}}
                             <div class="sidebar-a list-group-item list-group-item-action" id="b6">
                                 <i
-                                    class="fas fa-circle-notch text-size-small ml-2"></i>تنظیمات
+                                        class="fas fa-circle-notch text-size-small ml-2"></i>تنظیمات
                                 <div class="sidebar-ul" id="s6">
                                     {{-- <a href="{{ route('admin-slider-list') }}"
                                        class="list-group-item list-group-item-action"><i
                                             class="fas fa-circle-notch text-size-small ml-2"></i>اسلایدر</a> --}}
                                     <a href="{{ route('meta-list') }}"
                                        class="list-group-item list-group-item-action"><i
-                                            class="fas fa-circle-notch text-size-small ml-2"></i>meta</a>
+                                                class="fas fa-circle-notch text-size-small ml-2"></i>meta</a>
                                     <a href="{{ route('change-pass')}}"
                                        class="list-group-item list-group-item-action"><i
-                                            class="fas fa-circle-notch text-size-small ml-2"></i>تغییر رمز عبور</a>
+                                                class="fas fa-circle-notch text-size-small ml-2"></i>تغییر رمز عبور</a>
                                     <a href="{{ route('admin-setting-edit',1)}}"
                                        class="list-group-item list-group-item-action"><i
-                                            class="fas fa-circle-notch text-size-small ml-2"></i>تنظیمات سایت</a>
+                                                class="fas fa-circle-notch text-size-small ml-2"></i>تنظیمات سایت</a>
                                 </div>
                             </div>
                             <a href="{{ route('admin-activities') }}"
@@ -314,7 +309,7 @@
                 @yield('body')
             </div>
             @endrole
-           
+
             {{--end menues--}}
         </div>
     </div>
@@ -325,9 +320,9 @@
         <p class="pull-right text-grey-300">فرزان</p>
         <p class="pull-left text-grey-300">کپی رایت �    {{ jdate('Y') }} |
             طراحی و اجرا توسط  <a
-                href="http://adib-it.com/"
-                target="_blank"
-                rel="follow">تیم توسعه
+                    href="http://adib-it.com/"
+                    target="_blank"
+                    rel="follow">تیم توسعه
                 ادیب گستر عصر نوین</a>
 
             ، تمامی حقوق محفوظ
@@ -408,7 +403,7 @@
 
 </script>
 <script>
-        {{-- edit --}}
+    {{-- edit --}}
     let i = $('.fa-pencil');
     i.removeClass();
     i.addClass('far fa-edit');

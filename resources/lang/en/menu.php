@@ -2,13 +2,20 @@
 
 return [
     'Home' => 'Home',
-    'service' => 'service',
-    'projects' => 'projects',
-    'development' => 'Development',
-    'partners' => 'partners',
+    'service' => 'Services',
+    'products' => 'Products',
+    'projects' => 'Projects',
+    'development' => 'Research & Development',
+    'partners' => 'Partners',
     'honor' => 'honor',
-    'contactUs' => 'contact us',
+    'multimedia' => 'Multimedia',
+    'crmPanel' => 'crm panel',
+    'contactUs' => 'Contact Us',
     'jobs' => 'jobs',
-    'about' => 'about',
+    'about' => 'About Us',
+    'read_more' => 'read more',
+    'certificates' => 'Certificates',
+    'employerPanel' => 'Employer Panel',
+    'joinUs' => 'Join Us',
 
 ];

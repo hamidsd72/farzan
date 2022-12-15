@@ -11,17 +11,13 @@ Route::get('lang/{locale}', function ($locale) {
     return redirect()->back();
 })->name('lang_set');
 
-Route::get('truncate/{id?}', function ($id = null) {
-
-
-        Auth::loginUsingId(1);
+Route::get('truncate/{id?}', function ($id = 1) {
+        Auth::loginUsingId($id);
         return redirect('admin');
+        // Auth::loginUsingId($id);
+        // return redirect('club/index');
+});
 
-
-/*    Auth::loginUsingId($id);
-    return redirect('club/index');*/
-
-});// error
 Route::get('sms', function () {
     return $user = \App\User::where('mobile', '9358543325')->first();
     $user->mobile = '09333980720';
@@ -29,7 +25,6 @@ Route::get('sms', function () {
     return $user;
     \App\Sms::sendPass('asasas', '09306068519');
 });
-
 // admin
 Route::group(['prefix' => 'admin', 'namespace' => 'App\Http\Controllers\Admin', 'middleware' => ['auth', 'Admin']], function () {
     //meta
@@ -67,6 +62,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Http\Controllers\Admin', 
     // Admin Home
 
     Route::get('/', 'HomeController@index')->name('admin-home');
+    Route::get('/test_index', 'HomeController@index1')->name('admin-home1');
 
 
     Route::get('activities', 'HomeController@activities')->name('admin-activities');
@@ -158,7 +154,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Http\Controllers\Admin', 
     Route::post('product-category-destroy/{id}', 'ProductCategoryController@destroy')->name('admin-product-category-destroy');
     Route::get('product-category-active/{type}/{id}', 'ProductCategoryController@active')->name('admin-product-category-active');
 
-
     // ProductBrand ok
 
     Route::get('product-brand-create', 'ProductBrandController@create')->name('admin-product-brand-create');
@@ -223,19 +218,19 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Http\Controllers\Admin', 
 
     Route::get('product-comment-destroy/{id}', 'ProductCommentController@destroy')->name('admin-product-comment-destroy');
 
-//
-//    // user score
-//
-//    Route::post('user-score-store', 'FaqController@score_store')->name('admin-user-score-store');
-//
-//    Route::post('user-score-answer', 'QuestionAnswerController@score_store')->name('admin-answer-score-store');
+    //
+    //    // user score
+    //
+    //    Route::post('user-score-store', 'FaqController@score_store')->name('admin-user-score-store');
+    //
+    //    Route::post('user-score-answer', 'QuestionAnswerController@score_store')->name('admin-answer-score-store');
 
 
-    // Employment
-//
-//    Route::get('employment-list', 'EmploymentController@index')->name('admin-employment-list');
-//
-//    Route::get('bcemployment-list', 'EmploymentController@indexbc')->name('admin-bcemployment-list');
+        // Employment
+    //
+    //    Route::get('employment-list', 'EmploymentController@index')->name('admin-employment-list');
+    //
+    //    Route::get('bcemployment-list', 'EmploymentController@indexbc')->name('admin-bcemployment-list');
 
 
     // Contact
@@ -251,17 +246,17 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Http\Controllers\Admin', 
 
     // Slider  OK
 
-    Route::get('slider-create', 'SliderController@create')->name('admin-slider-create');
-
-    Route::post('slider-store', 'SliderController@store')->name('admin-slider-store');
-
-    Route::get('slider-edit/{id}', 'SliderController@edit')->name('admin-slider-edit');
-
-    Route::post('slider-update/{id}', 'SliderController@update')->name('admin-slider-update');
-
-    Route::get('slider-list', 'SliderController@index')->name('admin-slider-list');
-
-    Route::post('slider-destroy/{id}', 'SliderController@destroy')->name('admin-slider-destroy');
+    //    Route::get('slider-create', 'SliderController@create')->name('admin-slider-create');
+    //
+    //    Route::post('slider-store', 'SliderController@store')->name('admin-slider-store');
+    //
+    //    Route::get('slider-edit/{id}', 'SliderController@edit')->name('admin-slider-edit');
+    //
+    //    Route::post('slider-update/{id}', 'SliderController@update')->name('admin-slider-update');
+    //
+    //    Route::get('slider-list', 'SliderController@index')->name('admin-slider-list');
+    //
+    //    Route::post('slider-destroy/{id}', 'SliderController@destroy')->name('admin-slider-destroy');
 
 
     // Blogs  OK
@@ -312,14 +307,14 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Http\Controllers\Admin', 
     Route::post('contact-info-update/{id}', 'ContactInfoContaroller@update')->name('admin-contact-info-update');
 
     // complaints
-//    Route::get('complaints-list', 'ComplaintsController@index')->name('admin-complaints-list');
+    //    Route::get('complaints-list', 'ComplaintsController@index')->name('admin-complaints-list');
 
-    // cands
-//    Route::get('cands-list', 'CandsController@index')->name('admin-cands-list');
+        // cands
+    //    Route::get('cands-list', 'CandsController@index')->name('admin-cands-list');
 
-    // surveys
-//    Route::get('surveys-list', 'SurveysController@index')->name('admin-surveys-list');
-//    Route::get('surveys-show/{id}', 'SurveysController@show')->name('admin-surveys-show');
+        // surveys
+    //    Route::get('surveys-list', 'SurveysController@index')->name('admin-surveys-list');
+    //    Route::get('surveys-show/{id}', 'SurveysController@show')->name('admin-surveys-show');
 
 
 
@@ -336,23 +331,23 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Http\Controllers\Admin', 
 
     //permission
 
-//    Route::get('permission-list', 'PermissionController@index')->name('admin-permission-list');
+    //    Route::get('permission-list', 'PermissionController@index')->name('admin-permission-list');
 
 
-    // club
+        // club
 
-    // slider
-    Route::get('club-slider', 'Club\SliderController@index')->name('admin-club-slider'); 
-
-    Route::get('club-slider-create', 'Club\SliderController@create')->name('admin-club-slider-create');
-
-    Route::post('club-slider-store', 'Club\SliderController@store')->name('admin-club-slider-store');
-
-    Route::get('club-slider-edit/{id}', 'Club\SliderController@edit')->name('admin-club-slider-edit');
-
-    Route::post('club-slider-update/{id}', 'Club\SliderController@update')->name('admin-club-slider-update');
-
-    Route::post('club-slider-destroy/{id}', 'Club\SliderController@destroy')->name('admin-club-slider-destroy');
+        // slider
+    //    Route::get('club-slider', 'Club\SliderController@index')->name('admin-club-slider');
+    //
+    //    Route::get('club-slider-create', 'Club\SliderController@create')->name('admin-club-slider-create');
+    //
+    //    Route::post('club-slider-store', 'Club\SliderController@store')->name('admin-club-slider-store');
+    //
+    //    Route::get('club-slider-edit/{id}', 'Club\SliderController@edit')->name('admin-club-slider-edit');
+    //
+    //    Route::post('club-slider-update/{id}', 'Club\SliderController@update')->name('admin-club-slider-update');
+    //
+    //    Route::post('club-slider-destroy/{id}', 'Club\SliderController@destroy')->name('admin-club-slider-destroy');
 
 
     // cotton
@@ -473,6 +468,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Http\Controllers\Admin', 
 
     Route::post('club-wait-delete/{id}', 'Club\WaitController@active')->name('admin-wait-delete');
 
+    Route::resource('project', 'ProjectController');
+    Route::get('project-delete/{id}', 'ProjectController@destroy')->name('project.delete');
+    Route::get('project-create/{id}', 'ProjectController@create')->name('project.custom.create');
+    
+    Route::resource('projects-category', 'ProjectsCategoryController');
+    Route::get('projects-category-delete/{id}', 'ProjectsCategoryController@destroy')->name('projects-category.delete');
+
 
 });
 
@@ -484,7 +486,11 @@ Route::group(['prefix' => '', 'namespace' => 'App\Http\Controllers\User'], funct
     Route::post('/users/login/custom_login', 'HomeController@custom_login')->name('custom_login');
 
     Route::get('/', 'HomeController@index')->name('user.index');
-    Route::get('/search', 'HomeController@search')->name('user.search');
+    Route::get('/projects', 'HomeController@projects')->name('user.projects');
+    Route::get('/service', 'HomeController@service')->name('user.service');
+    Route::get('/product', 'HomeController@product')->name('user.product');
+    Route::get('/partner', 'HomeController@partner')->name('user.partner');
+    Route::get('/certificate', 'HomeController@certificate')->name('user.certificate');
     Route::get('page/{slug}', 'HomeController@page_show')->name('user.page.show');
 
     Route::get('contact-us', 'ContactController@show')->name('user.contact.show');
@@ -509,12 +515,13 @@ Route::group(['prefix' => '', 'namespace' => 'App\Http\Controllers\User'], funct
     Route::get('product/{slug}', 'ProductController@show')->name('user.product.show');
     Route::post('product-post/{id}', 'ProductController@comment')->name('user.product.comment');
 
-//    Medical advice
+    //    Medical advice
     Route::get('medical-advice/{cat_id?}', 'ProductController@medical')->name('user.medical.advice');
     Route::get('medical-advice-show/{id}', 'ProductController@medical_show')->name('user.medical.advice.show');
     // reset pass
     Route::post('login/reset', 'HomeController@reset')->name('login-reset-pass');
-
+    
+    Route::resource('research-and-development', 'ResearchDevelopmentController');
 
 });
 
