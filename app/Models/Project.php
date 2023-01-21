@@ -13,11 +13,15 @@ class Project extends Model {
     ];
 
     public function cat() {
-        return $this->belogsTo('App\Models\ProjectsCategory', 'cat_id')->first();
+        return $this->belongsTo('App\Models\ProjectsCategory', 'cat_id')->first();
     }
 
     public function photo() {
         return $this->morphOne('App\Models\Photo', 'pictures');
+    }
+
+    public function galeries() {
+        return $this->hasMany('App\Models\Galery', 'item_id')->where('model_name', 'Project')->get();
     }
 
     public function activity() {

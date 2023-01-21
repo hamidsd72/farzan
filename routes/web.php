@@ -3,7 +3,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 use App\User;
-
 Auth::routes(['register' => false]);
 // lang change
 Route::get('lang/{locale}', function ($locale) {
@@ -471,6 +470,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Http\Controllers\Admin', 
     Route::resource('project', 'ProjectController');
     Route::get('project-delete/{id}', 'ProjectController@destroy')->name('project.delete');
     Route::get('project-create/{id}', 'ProjectController@create')->name('project.custom.create');
+    Route::post('project-galery-add', 'ProjectController@galery')->name('project.galery.add');
     
     Route::resource('projects-category', 'ProjectsCategoryController');
     Route::get('projects-category-delete/{id}', 'ProjectsCategoryController@destroy')->name('projects-category.delete');

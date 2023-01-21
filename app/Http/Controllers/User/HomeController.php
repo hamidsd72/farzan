@@ -184,7 +184,7 @@ class HomeController extends Controller
     public function partner(){
         $setting=Setting::find(1);
         $titleSeo = "همکاران فرزان";
-        $items = Partner::where('is_title', 'deactive')->orderBy('sort_id')->get();
+        $items = Partner::where('status','active')->where('is_title', 'deactive')->orderBy('sort_id')->get();
         $item = Partner::where('is_title', 'active')->first();
         return view('user.partner.index',compact('titleSeo','setting','item','items'));
     }

@@ -1,6 +1,8 @@
 @component('layouts.admin')
 @section('title') {{ $title }} @endsection
 @section('body')
+    <style> input { max-width: 60px; } </style>
+
     <div class="condition pull-right w-100 mb-2">
         <div class="title">
             <h5><i class="fa fa-trello text-size-large ml-2"></i>{{ $title }}</h5>
@@ -14,7 +16,9 @@
             <table class="table  table-bordered pull-right w-100">
                 <thead>
                 <tr>
+                    <th data-toggle="true">دسته</th>
                     <th data-toggle="true">نام</th>
+                    <th data-toggle="true">ترتیب</th>
                     <th data-toggle="true">تصویر</th>
                     <th data-hide="phone">عملیات</th>
                 </tr>
@@ -22,10 +26,9 @@
                 <tbody>
                 @foreach($items as $item)
                     <tr>
-                        <td class="text-{{$item->cat()?$item->cat()->status=='active'?'success':'danger':'secondary'}}">
+                        <td style="max-width: 140px" class="text-{{$item->cat()?$item->cat()->status=='active'?'success':'danger':'secondary'}}">
                             {{ $item->cat()?$item->cat()->name:'________' }}</td>
                         <td class="text-{{$item->status=='active'?'success':'danger'}}">{{ $item->title }}</td>
-                        <td><img src="{{$item->photo?url($item->photo):''}}" style="height: 60px"></td>
                         <td>
                             <form action="{{route('project.update', $item->id)}}" method="post">
                                 @method('PATCH')
@@ -45,9 +48,10 @@
                                 <button type="submit" id="form-{{$item->id}}" class="d-none">submit</button>
                             </form>
                         </td>
-                        <td class="table-td-icons text-center" style="min-height: 80px">
+                        <td>{{$item->galeries()->count()}}</td>
+                        <td class="table-td-icons text-center" style="min-width: 80px">
                             <a href="{{ route('project.edit', $item->id) }}" title="ویرایش"><i class="fa fa-edit"></i></a>
-                            <a href="{{route('project.delete',$item->id)}}" title="حذف"><i class="fa fa-trash text-danger"></i></a>
+                            <a href="{{route('project.delete',$item->id)}}" title="حذف" onclick="confirm('حذف شود ؟')"><i class="fa fa-trash text-danger"></i></a>
                         </td>
                     </tr>
                 @endforeach

@@ -115,7 +115,7 @@ class PartnerController extends Controller {
 
     // Index Function
     public function index() {
-        $items = Partner::where('is_title', 'deactive')->orderBy('id', 'DESC')->get();
+        $items = Partner::where('is_title', 'deactive')->orderBy('sort_id')->get();
         $partner = Partner::where('is_title', 'active')->first();
         return view('admin.partner.index', compact('partner','items'), ['title' => 'همکاران ما']);
     }

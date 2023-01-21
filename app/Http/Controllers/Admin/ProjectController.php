@@ -6,6 +6,7 @@ use App\Activity;
 use App\Models\Lang;
 use App\Http\Controllers\Controller;
 use App\Photo;
+use App\Models\Galery;
 use App\Models\Project;
 use App\Models\ProjectsCategory;
 use Illuminate\Http\Request;
@@ -34,11 +35,11 @@ class ProjectController extends Controller {
             'capacity'      => 'required', 
             'place'         => 'required', 
             'text'          => 'required', 
-            // 'title_en'      => 'required', 
-            // 'employer_en'   => 'required', 
-            // 'capacity_en'   => 'required',
-            // 'place_en'      => 'required', 
-            // 'text_en'       => 'required'
+            'title_en'      => 'required', 
+            'employer_en'   => 'required', 
+            'capacity_en'   => 'required',
+            'place_en'      => 'required', 
+            'text_en'       => 'required'
         ]);
         if ($validator->fails()) {
             return redirect()->back()->with([
@@ -62,7 +63,28 @@ class ProjectController extends Controller {
             $item->text_en      = $request->text_en;
             $item->save();
 
-            // if ($request->hasFile('photo')) $item->photo = file_store($request->photo, 'includes/asset/uploads/Partner/photos/', 'photo-');
+            if ($request->hasFile('photos')) {
+                foreach ($request->photos as $image) {
+                    // $photo = new Galery();
+                    // $photo->model_name = 'Project';
+                    // $photo->item_id = $item->id;
+
+                    // $imageName = time().'.'.$image->extension();
+
+                    // // Public Folder
+                    // $image->move(asset('images'), $imageName);
+
+                    // $photo->path = $imageName;
+                    // dd($imageName , $photo);
+                    // $photo->save();
+
+
+
+                    $photo = new Photo();
+                    $photo->path = file_store($image, 'includes/asset/uploads/project/photos/', 'image-');
+                    $item->photo()->save($photo);
+                }
+            }
 
             $activity = new Activity();
             $activity->user_id = auth()->user()->id;
@@ -70,6 +92,7 @@ class ProjectController extends Controller {
             $activity->text = ' پروژه : ' . '(' . $request->title . ')' . ' را ثبت کرد';
             $item->activity()->save($activity);
             return redirect()->route('project.index')->with(['status' => 'success', "message" => ' با موفقیت ثبت شد.']);
+            // return redirect()->route('project.edit',$item->id)->with(['status' => 'success', "message" => ' با موفقیت ثبت شد.']);
         } catch (\Exception $e) {
             dd($e);
             return redirect()->back()->with(['status' => 'danger-600', "message" => 'یک خطا رخ داده است، لطفا بررسی بفرمایید.']);
@@ -78,8 +101,9 @@ class ProjectController extends Controller {
 
     // Edit Function
     public function edit($id) {
-        $item = Partner::find($id);
-        return view('admin.project.edit', compact('item'), ['title' => $item->title]);
+        $item = Project::find($id);
+        $items = ProjectsCategory::all();
+        return view('admin.project.edit', compact('item','items'), ['title' => $item->title]);
     }
 
     // Update Function
@@ -93,11 +117,11 @@ class ProjectController extends Controller {
             'capacity'      => 'required', 
             'place'         => 'required', 
             'text'          => 'required', 
-            // 'title_en'      => 'required', 
-            // 'employer_en'   => 'required', 
-            // 'capacity_en'   => 'required',
-            // 'place_en'      => 'required', 
-            // 'text_en'       => 'required'
+            'title_en'      => 'required', 
+            'employer_en'   => 'required', 
+            'capacity_en'   => 'required',
+            'place_en'      => 'required', 
+            'text_en'       => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -167,6 +191,32 @@ class ProjectController extends Controller {
             $item->activity()->save($activity);
             return redirect()->back()->with(['status' => 'success', "message" => ' با موفقیت حذف شد.']);
         } catch (\Exception $e) {
+            return redirect()->back()->with(['status' => 'danger-600', "message" => 'یک خطا رخ داده است، لطفا بررسی بفرمایید.']);
+        }
+    }
+
+     // Update Function
+    public function galery(Request $request) {
+        $item = Project::findOrFail($request->id);
+        try {
+            if ($request->hasFile('photos')) {
+
+                // $photo = new Galery();
+                // $photo->model_name = 'Project';
+                // $photo->item_id = $item->id;
+                // $name = time().'.'.$request->photos->extension();
+                // $request->photos->move(asset('/uploads/project/photos/'), $name);
+                // $photo->path = $name;
+                // // $photo->path = file_store($request->photos, 'includes/asset/uploads/project/photos/', 'photo-');
+                // $photo->save();
+
+                $photo = new Photo();
+                $photo->path = file_store($request->photos, 'includes/asset/uploads/project/photos/', 'image-');
+                $item->photo()->save($photo);
+            }
+            return redirect()->back()->with(['status' => 'success', "message" => ' با موفقیت اضافه شد.']);
+        } catch (\Exception $e) {
+            dd($e);
             return redirect()->back()->with(['status' => 'danger-600', "message" => 'یک خطا رخ داده است، لطفا بررسی بفرمایید.']);
         }
     }

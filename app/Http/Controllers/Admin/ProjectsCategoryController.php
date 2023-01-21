@@ -56,7 +56,7 @@ class ProjectsCategoryController extends Controller {
 
     // Edit Function
     public function edit($id) {
-        $item = Partner::find($id);
+        $item = ProjectsCategory::find($id);
         return view('admin.projects-category.edit', compact('item'), ['title' => $item->name]);
     }
 
@@ -85,7 +85,7 @@ class ProjectsCategoryController extends Controller {
             $activity = new Activity();
             $activity->user_id = auth()->user()->id;
             $activity->type = 'update';
-            $activity->text = ' همکاران ما : ' . '(' . $old_name . ')' . ' را ویرایش کرد';
+            $activity->text = ' دسته بندی پروژه ها : ' . '(' . $old_name . ')' . ' را ویرایش کرد';
             $item->activity()->save($activity);
             return redirect()->route('projects-category.index')->with(['status' => 'success', "message" => ' با موفقیت ثبت شد.']);
         } catch (\Exception $e) {

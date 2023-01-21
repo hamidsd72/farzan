@@ -67,7 +67,7 @@
 
                 <div class="row">
 
-                    <div class="col-lg">
+                    {{-- <div class="col-lg">
                         <label for="flexbox" class="form-label">* اندازه عرض محتوا  :</label>
                         <select name="flexbox" id="flexbox" class="form-control">
                             <option value="3">۱/۴ عرض صفحه</option>
@@ -75,7 +75,7 @@
                             <option value="6">۱/۲ عرض صفحه</option>
                             <option value="8">۲/۳ عرض صفحه</option>
                         </select>
-                    </div>
+                    </div> --}}
 
                     <div class="col-lg">
                         <label for="status" class="form-label">* وضعیت  :</label>

@@ -20,7 +20,12 @@
                 @foreach($items as $item)
                     <tr>
                         <td class="text-{{$item->status=='active'?'success':'danger'}}">{{ $item->name }}</td>
-                        <td><a href="{{ route('project.show', $item->id) }}" >لیست پروژه ها</a></td>
+                        <td>
+                            <a href="{{ route('project.show', $item->id) }}" >
+                                لیست پروژه ها
+                                {{$item->projects()->count()}}
+                            </a>
+                        </td>
                         <td>
                             <form action="{{route('projects-category.update', $item->id)}}" method="post">
                                 {{ csrf_field() }}

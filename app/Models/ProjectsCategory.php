@@ -12,7 +12,7 @@ class ProjectsCategory extends Model {
     ];
 
     public function projects() {
-        return $this->hasMany('App\Models/Project', 'cat_id');
+        return $this->hasMany('App\Models\Project', 'cat_id');
     }
 
     public function activity() {

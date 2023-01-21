@@ -71,7 +71,7 @@
                 </div>
 
                 <div class="row">
-
+{{-- 
                     <div class="col-lg">
                         <label for="flexbox" class="form-label">* اندازه عرض محتوا  :</label>
                         <select name="flexbox" id="flexbox" class="form-control">
@@ -80,7 +80,7 @@
                             <option value="6" {{$item->flexbox=='6'?'selected':''}}>۱/۲ عرض صفحه</option>
                             <option value="8" {{$item->flexbox=='8'?'selected':''}}>۲/۳ عرض صفحه</option>
                         </select>
-                    </div>
+                    </div> --}}
 
                     <div class="col-lg">
                         <label for="status" class="form-label">* وضعیت  :</label>
